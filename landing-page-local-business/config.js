@@ -38,8 +38,8 @@ const siteConfig = {
     title: "Atendimento em Minha cidade e Região",
     description: "Atendemos residências, empresas, condomínios e chácaras.",
     address: "Rua Azul, 8 - Meu Bairro, Minha cidade - UF",
-    mapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.807492396557!2d-53.82725832355695!3d-29.667360113894663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95023355e5b9b86f%3A0x77aa1a7f551a1bd2!2sR.%20Nahir%20Zambrano%20da%20Costa%2C%208%20-%20Ch%C3%A1cara%20das%20Flores%2C%20Minha%20cidade%20-%20UF%2C%2097043-742!5e0!3m2!1spt-BR!2sbr!4v1784155405285!5m2!1spt-BR!2sbr",
-    mapsExternalUrl: "https://www.google.com/maps/search/?api=1&query=Rua+Nahir+Zambrano+da+Costa+8+Minha+cidade+UF"
+    mapsEmbedUrl: "",
+    mapsExternalUrl: ""
   },
 
   // Tema de Cores do Site (Opcional)
@@ -201,7 +201,7 @@ const siteConfig = {
 
   about: {
     eyebrow: "Quem Somos",
-    title: "Atendimento profissional em Santa Maria e Região",
+    title: "Atendimento profissional em Minha cidade e Região",
     paragraphs: [
       "Somos uma empresa especializada em serviços de manutenção e reparos residenciais e comerciais, com foco em qualidade, agilidade e satisfação do cliente.",
       "Nosso compromisso é resolver cada problema com qualidade, transparência e agilidade."
@@ -234,7 +234,7 @@ const siteConfig = {
 
   finalCta: {
     title: "Precisa de atendimento agora?",
-    description: "Entre em contato e receba atendimento rápido em Santa Maria e Região.",
+    description: "Entre em contato e receba atendimento rápido em Minha cidade e Região.",
     mascotImage: "",
     mascotAlt: "Mascote"
   }
