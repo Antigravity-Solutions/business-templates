@@ -1,5 +1,7 @@
 Business Local Template
 
+🔗 [Template página para serviços](https://business-templates-sandy.vercel.app/)
+
 Landing Page responsiva para pequenos negócios.
 
 ✔ HTML
