@@ -1069,28 +1069,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         footerObserver.observe(footer);
     }
-});
-
-/* ==========================================================================
-    INTERSECTION OBSERVER FOR ANIMATIONS
-    ========================================================================== */
+    
+    /* ==========================================================================
+        INTERSECTION OBSERVER FOR ANIMATIONS
+       ========================================================================== */
     AOS.init({
         duration: 600,
         once: false
     });
-
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
+    
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    
+    document.querySelectorAll("[data-animate]").forEach(element => {
+      observer.observe(element);
     });
-  },
-  { threshold: 0.25 }
-);
-
-document.querySelectorAll("[data-animate]").forEach(element => {
-  observer.observe(element);
 });
