@@ -28,6 +28,7 @@
 
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 </head>
 
 <body>
@@ -86,13 +87,13 @@
                         <div class="hero-badges" id="hero-badges-container"></div>
 
                         <!-- Título e Subtítulos dinâmicos -->
-                        <h1 id="hero-title" data-config="hero.title">Atendimento profissional para sua necessidade</h1>
-                        <p class="hero-subtitle" data-config="hero.subtitle">Soluções rápidas para residências, empresas
+                        <h1 id="hero-title" data-config="hero.title" data-aos="fade-up" data-aos-delay="300" >Atendimento profissional para sua necessidade</h1>
+                        <p class="hero-subtitle" data-config="hero.subtitle" data-aos="fade-up" data-aos-delay="100">Soluções rápidas para residências, empresas
                             e condomínios.</p>
-                        <p class="hero-description" data-config="hero.description">Conte com uma equipe preparada para
+                        <p class="hero-description" data-config="hero.description" data-aos="fade-up" data-aos-delay="200">Conte com uma equipe preparada para
                             atender com agilidade, segurança e qualidade.</p>
 
-                        <div class="hero-buttons">
+                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
                             <a href="#" class="btn btn-whatsapp btn-large" data-whatsapp-link="true" target="_blank"
                                 rel="noopener noreferrer">
                                 <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -112,7 +113,7 @@
                         </div>
 
                         <!-- Card de Emergência Clicável -->
-                        <a href="#" class="emergency-contact-card" data-phone-primary-link="true">
+                        <a href="#" class="emergency-contact-card" data-phone-primary-link="true"  data-aos="flip-left" data-aos-delay="400">
                             <div class="emergency-card-inner">
                                 <div class="emergency-icon-wrapper">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -143,11 +144,11 @@
 
         <!-- Hero Trust Bar (Indicadores de Confiança) -->
         <div class="hero-trust-bar">
-            <div class="container hero-trust-container" id="trust-bar-container"></div>
+            <div class="container hero-trust-container" id="trust-bar-container" data-aos="zoom-in-right"></div>
         </div>
 
         <!-- Seção de Serviços -->
-        <section id="servicos" class="services-section">
+        <section id="servicos" class="services-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle" data-config="business.segment">Serviços</span>
@@ -161,7 +162,7 @@
         </section>
 
         <!-- Seção Como Funciona -->
-        <section id="como-funciona" class="how-it-works-section">
+        <section id="como-funciona" class="how-it-works-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Sem Complicação</span>
@@ -202,7 +203,7 @@
         </section>
 
         <!-- Seção Por que Escolher / Diferenciais -->
-        <section id="por-que-escolher" class="why-choose-section">
+        <section id="por-que-escolher" class="why-choose-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Nossos Diferenciais</span>
@@ -216,7 +217,7 @@
         </section>
 
         <!-- Galeria Recentes -->
-        <section id="galeria" class="gallery-section">
+        <section id="galeria" class="gallery-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Resultados Reais</span>
@@ -231,7 +232,7 @@
         </section>
 
         <!-- Seção Antes e Depois -->
-        <section id="resultados" class="before-after-section">
+        <section id="resultados" class="before-after-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Destaques</span>
@@ -244,14 +245,14 @@
         </section>
 
         <!-- Seção Quem Somos -->
-        <section id="quem-somos" class="about-section">
+        <section id="quem-somos" class="about-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container about-grid" id="about-content">
                 <!-- Será gerado dinamicamente -->
             </div>
         </section>
 
         <!-- Seção Equipamentos -->
-        <section id="equipamentos" class="equipments-section">
+        <section id="equipamentos" class="equipments-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Tecnologia</span>
@@ -264,7 +265,7 @@
         </section>
 
         <!-- Área de Atendimento e Google Maps -->
-        <section class="location-section">
+        <section class="location-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container location-container">
                 <div class="location-content">
                     <span class="section-subtitle">Localização</span>
@@ -294,7 +295,7 @@
 
         <!-- Depoimentos (Avisos de mock no README e HTML) -->
         <!-- NOTA IMPORTANTE: Substituir os depoimentos fictícios por avaliações reais do Google Maps / Redes Sociais antes de publicar o site! -->
-        <!-- <section id="avaliacoes" class="testimonials-section">
+        <section id="avaliacoes" class="testimonials-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Opinião de Quem Confia</span>
@@ -302,13 +303,13 @@
                     <p>Confira a avaliação de quem já contratou nossos serviços.</p>
                 </div>
 
-                Grid de avaliações dinâmico
+                <!-- Grid de avaliações dinâmico -->
                 <div class="testimonials-grid" id="testimonials-grid"></div>
             </div>
-        </section> -->
+        </section>
 
         <!-- FAQ Accordion -->
-        <section id="faq" class="faq-section">
+        <section id="faq" class="faq-section" data-aos="fade-up" data-aos-delay="300">
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Dúvidas Frequentes</span>
@@ -326,7 +327,7 @@
         </section>
 
         <!-- CTA Final Section -->
-        <section id="contato" class="cta-final-section">
+        <section id="contato" class="cta-final-section" data-aos="flip-up">
             <div class="container">
                 <div class="cta-box" id="final-cta-content">
                     <!-- Será gerado dinamicamente -->
@@ -438,6 +439,7 @@
 
     <!-- JavaScript Data and Controller (Sem ES modules, carrega sequencialmente) -->
     <script src="config.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js" defer></script>
 </body>
 
