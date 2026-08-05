@@ -1,4 +1,4 @@
-window.siteConfig = {
+export const siteConfig = {
   business: {
     name: "Assolin Tecnologia",
 
@@ -153,7 +153,7 @@ window.siteConfig = {
         cardClass: "primary",
         cardBadge: "Presença local",
         cardImage: "./assets/hero-banner.png",
-        CardImgAlt: "Imagem do projeto Desentupidora J.E.",
+        cardImgAlt: "Imagem do projeto Desentupidora J.E.",
         cardTitle: "Desentupidora J.E.",
         cardDescription: "Landing page responsiva com serviços, contato rápido, mapa, SEO local e estrutura preparada para coleta contínua de evidências.",
         links: [
@@ -161,14 +161,19 @@ window.siteConfig = {
               url: "https://desentupidoraje.com.br",
               label: "Saiba mais",
               class: "btn btn-primary"
-          }
+            },
+            {
+              url: "https://desentupidoraje.com.br",
+              label: "Github",
+              class: "btn btn-secondary"
+            },
         ]
       },
       {
         cardClass: "secondary",
         cardBadge: "Sistema web",
         cardImage: "./assets/gth-agents.png",
-        CardImgAlt: "Imagem do projeto Gth Agents",
+        cardImgAlt: "Imagem do projeto Gth Agents",
         cardTitle: "GTH Agents",
         cardDescription: "Plataforma de gestão por competências, avaliação, desempenho, PDI, metas e apoio à tomada de decisão.",
         links: [

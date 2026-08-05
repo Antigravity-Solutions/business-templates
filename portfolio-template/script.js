@@ -1,3 +1,6 @@
+
+import {siteConfig} from './siteConfig.js';
+
 function getElement(elementId) {
   return document.getElementById(elementId);
 }
@@ -42,6 +45,16 @@ function setImage(elementId, imageConfig) {
   if (imageConfig.alt) {
     image.alt = imageConfig.alt;
   }
+}
+
+function escapeHTML(str) {
+  if (typeof str != 'string') return str || '';
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039")
 }
 
 function renderHero(config) {
@@ -191,47 +204,56 @@ function renderProcess(config) {
 }
 
 function renderProjects(config) {
-  const projects = getElement("projects")
+  const projectsContainer = getElement("projects")
   const projectsItems = config.projects?.items || [];
 
   setText("section-project-badge", config.projects?.badge || "");
   setText("section-project-title", config.projects?.title || "");
   setText("section-project-subtitle", config.projects?.subtitle || "")
 
-
-
-  if (projects) {
-    projects.innerHTML = projectsItems
+  if (projectsContainer) {
+    projectsContainer.innerHTML = projectsItems
       .map((item) => {
-        return `
-          <article class="project ${item.cardClass}">
-            <div class="card-badge">
-              <span class="eyebrow">${item.cardBadge}</span>
-            </div>
-            <div class="card-header">
-              <img src="${item.cardImage}" alt="${item.cardImgAlt}" width="320" height="180">
-            </div>
-            <div class="card-body">
-              <div class="card-body-title">
-                <h3>${item.cardTitle}</h3>
+        const linksHTML = Array.isArray(item.links)
+          ? item.links
+            .map((link) => `
+              <a href="${escapeHTML(link.url)} class="${escapeHTML(link.class || 'btn btn-primarty')}" target="_blank" rel="noopener noreferrer">
+                ${escapeHTML(link.label)}
+              </a>
+            `
+            )
+            .join("")
+          : "";
+
+          return `
+            <article class="project ${escapeHTML(item.cardClass || '')}">
+              <div class="card-badge">
+                <span class="eyebrow">${escapeHTML(item.cardBadge)}</span>
               </div>
-              <div class="card-body-description">
-                <p>${item.cardDescription}</p>
+              <div class="card-header">
+                <img src="${escapeHTML(item.cardImage)}" alt="${escapeHTML(item.cardImgAlt)}" width="320" height="180">
               </div>
-              <div id="card-footer" class="card-footer">
-                <a href="${item.links.url}" class="${item.links.class}" target="_blank" rel="noopener noreferrer">${item.links.label}</a>
-                <a href="${item.links.url}" class="${item.links.class}" target="_blank" rel="noopener noreferrer">${item.links.label}</a>
+              <div class="card-body">
+                <div class="card-body-title">
+                  <h3>${escapeHTML(item.cardTitle)}</h3>
+                </div>
+                <div class="card-body-description">
+                  <p>${escapeHTML(item.cardDescription)}</p>
+                </div>
+                <div class="card-footer">
+                  ${linksHTML}
+                </div>
               </div>
-            </div>
-          </article>
-        `;
+            </article>
+          `;
       })
       .join("");
   }
+
 }
 
 function initializeSite() {
-  const config = window.siteConfig;
+  const config = siteConfig;
 
   if (!config) {
     console.error(

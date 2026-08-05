@@ -64,6 +64,7 @@
     .project .card-header{width: 100%; height: 180px;border: 1px solid #d8e5e8;border-radius: 12px;margin-bottom: 16px;}
     .project .card-header img{ width: 100%;height: 100%;object-fit: cover;border-radius: 12px;}
     .project p{max-width:600px;margin-bottom:10px}.primary p{color:#d8f1f3}.secondary p{color:var(--muted)}
+    .project .card-footer{display: flex; align-items: center; justify-content: space-around;}
     .about{display:grid;grid-template-columns:.7fr 1.3fr;gap:40px;align-items:center}
     .about-logo{background:var(--paper);border-radius:32px;padding:34px}.about-logo img{max-width:320px;margin:auto}
     .about p{color:var(--muted)}
