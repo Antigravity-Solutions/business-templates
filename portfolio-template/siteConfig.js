@@ -181,7 +181,7 @@ export const siteConfig = {
               url: "",
               label: "",
               class: "btn btn-primary"
-          }
+            }
         ]
       },
     ]

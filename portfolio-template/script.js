@@ -217,7 +217,7 @@ function renderProjects(config) {
         const linksHTML = Array.isArray(item.links)
           ? item.links
             .map((link) => `
-              <a href="${escapeHTML(link.url)} class="${escapeHTML(link.class || 'btn btn-primarty')}" target="_blank" rel="noopener noreferrer">
+              <a href="${escapeHTML(link.url)}" class="${escapeHTML(link.class || 'btn btn-primarty')}" target="_blank" rel="noopener noreferrer">
                 ${escapeHTML(link.label)}
               </a>
             `
