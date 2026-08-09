@@ -1,0 +1,600 @@
+/* ==========================================================================
+   Componentes da Interface - Design System Refinado
+   ========================================================================== */
+
+/* Barra de Aviso de Demonstração */
+.demo-banner {
+  background-color: var(--color-secondary);
+  color: var(--color-text-light);
+  font-size: var(--font-size-xs);
+  text-align: center;
+  padding: var(--space-xs) var(--space-md);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Hero Comercial Full-Width com Overlay Escuro & Alto Contraste
+   ========================================================================== */
+.hero-header {
+  position: relative;
+  background-color: #0F172A;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* Overlay Escuro com Gradiente para Garantir Legibilidade 100% */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.82) 0%, rgba(15, 23, 42, 0.94) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Container da Hero Posicionado Estritamente Acima do Overlay (z-index: 2) */
+.hero-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Topo da Hero: Logo, Nome da Marca e Status */
+.hero-top-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.hero-logo {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  border-radius: var(--radius-full);
+  padding: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.hero-brand-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-brand-name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF !important;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Badges de Status (Aberto / Fechado) em Alto Contraste */
+.business-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.business-status-badge.status-open {
+  background-color: rgba(43, 147, 72, 0.28);
+  color: #81C784 !important;
+  border: 1px solid rgba(129, 199, 132, 0.45);
+}
+
+.business-status-badge.status-closed {
+  background-color: rgba(217, 4, 41, 0.28);
+  color: #FF8A80 !important;
+  border: 1px solid rgba(255, 138, 128, 0.45);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* Conteúdo Principal da Hero */
+.hero-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 680px;
+}
+
+.hero-headline {
+  font-size: clamp(1.65rem, 5vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.hero-subheadline {
+  font-size: var(--font-size-md);
+  color: rgba(255, 255, 255, 0.92) !important;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Chips de Confiança (Informação Estática Não Clicável) */
+.hero-trust-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: 4px;
+}
+
+.trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: #FFFFFF !important;
+  cursor: default;
+}
+
+/* Action Chips Clicáveis da Hero (Instagram, Localização, etc.) */
+.hero-quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: 6px;
+}
+
+.hero-action-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: #FFFFFF !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.hero-action-chip .action-chip-arrow {
+  font-size: 0.85em;
+  opacity: 0.85;
+  transition: transform 0.2s ease;
+}
+
+.hero-action-chip:hover, .hero-action-chip:focus-visible {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.hero-action-chip:hover .action-chip-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Grupo de CTAs da Hero */
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: 6px;
+}
+
+.btn-hero-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF !important;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(230, 57, 70, 0.45);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-hero-primary:hover, .btn-hero-primary:focus-visible {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.55);
+}
+
+.btn-hero-secondary {
+  background: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF !important;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-hero-secondary:hover, .btn-hero-secondary:focus-visible {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Navegação por Categorias (Pills Sticky com Scroll Horizontal Nativo)
+   ========================================================================== */
+.categories-sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.categories-pill-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-xs);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  scrollbar-width: none;
+}
+
+.categories-pill-list::-webkit-scrollbar {
+  display: none;
+}
+
+.categories-pill-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  white-space: nowrap;
+  padding: var(--space-xs) var(--space-md);
+  min-height: var(--min-touch-target);
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+}
+
+.category-pill.active, .category-pill:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   Seção de Destaques (Scroll Touch em Mobile / Scrollbar Visível em Desktop)
+   ========================================================================== */
+.highlights-section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+}
+
+.section-header {
+  margin-bottom: var(--space-lg);
+}
+
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.highlights-scroll-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-md);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--space-md);
+  padding-left: 2px;
+  padding-right: 2px;
+  scrollbar-width: none;
+}
+
+.highlights-scroll-track::-webkit-scrollbar {
+  display: none;
+}
+
+.highlights-scroll-track:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* Card de Destaque no Mobile: min(82vw, 280px) deixa ~18-20% do próximo card visível */
+.highlight-card {
+  flex: 0 0 min(82vw, 280px);
+  scroll-snap-align: start;
+}
+
+/* ==========================================================================
+   Grids e Cards de Produtos (Design System Unificado)
+   ========================================================================== */
+.menu-category-section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.category-header {
+  margin-bottom: var(--space-lg);
+}
+
+.category-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+}
+
+.category-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-2xs);
+}
+
+/* Grid Geral de Produtos */
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+/* Card de Produto Padrão */
+.product-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+}
+
+.product-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Badges sobre a Imagem com Respiro das Bordas */
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.3px;
+}
+
+.product-badge-unavailable {
+  background-color: var(--color-danger);
+  color: var(--color-text-light);
+}
+
+/* Card Indisponível */
+.product-card-disabled {
+  opacity: 0.75;
+}
+
+.product-card-disabled .product-image {
+  filter: grayscale(70%);
+}
+
+/* Conteúdo Interno do Card */
+.product-content {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+  line-height: 1.3;
+}
+
+.product-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-lg);
+  flex-grow: 1;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.product-price {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  min-height: var(--min-touch-target);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.btn-primary:hover, .btn-primary:focus-visible {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-disabled {
+  background-color: var(--color-border);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Seção de Informações Comerciais & Localização (Cards Independentes)
+   ========================================================================== */
+.info-section {
+  background-color: var(--color-bg);
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.info-card {
+  background-color: var(--color-surface);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.info-card-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.info-list {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  line-height: 1.5;
+}
+
+/* Rodapé */
+.site-footer {
+  background-color: var(--color-secondary);
+  color: var(--color-text-light);
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  text-align: center;
+  font-size: var(--font-size-xs);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.footer-credits {
+  opacity: 0.8;
+}
+
+.footer-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+}

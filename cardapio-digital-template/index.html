@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Primário (Preenchido dinamicamente via siteConfig.js no main.js) -->
+  <title id="page-title">Burguer & Cia | Cardápio Digital Essencial</title>
+  <meta name="description" id="page-meta-description" content="Confira nosso cardápio digital completo de hambúrgueres artesanais, combos e bebidas. Faça seu pedido diretamente pelo WhatsApp!">
+  <link rel="canonical" id="page-canonical-link" href="https://cardapio-demo.assolin.com.br">
+  <link rel="icon" type="image/svg+xml" id="page-favicon" href="/favicon.svg">
+
+  <!-- Open Graph / Redes Sociais -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" id="og-title" content="Burguer & Cia | Cardápio Digital">
+  <meta property="og:description" id="og-description" content="Hambúrgueres artesanais, combos e sobremesas deliciosas. Peça pelo WhatsApp!">
+  <meta property="og:image" id="og-image" content="/images/og-image.webp">
+  <meta property="og:url" id="og-url" content="https://cardapio-demo.assolin.com.br">
+
+  <!-- Dados Estruturados JSON-LD (SEO de Estabelecimento) -->
+  <script type="application/ld+json" id="json-ld-schema">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Burguer & Cia",
+    "image": "/images/logo.svg",
+    "description": "Hambúrgueres artesanais e porções crocantes.",
+    "telephone": "(11) 99999-8888",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Paulista, 1000",
+      "addressLocality": "São Paulo",
+      "addressRegion": "SP",
+      "postalCode": "01310-100",
+      "addressCountry": "BR"
+    }
+  }
+  </script>
+
+  <!-- Importação de Estilos do Design System -->
+  <link rel="stylesheet" href="/src/styles/reset.css">
+  <link rel="stylesheet" href="/src/styles/variables.css">
+  <link rel="stylesheet" href="/src/styles/base.css">
+  <link rel="stylesheet" href="/src/styles/components.css">
+  <link rel="stylesheet" href="/src/styles/responsive.css">
+</head>
+<body>
+
+  <!-- Barra Superior de Aviso (Demonstração do Template) -->
+  <aside class="demo-banner" role="note" id="demo-banner">
+    <!-- Preenchido via JS com siteConfig.identity.demoNotice -->
+  </aside>
+
+  <!-- Cabeçalho e Hero de Identidade (Com Imagem Full-Width e Overlay Escuro) -->
+  <header class="hero-header" id="hero-header">
+    <div class="hero-overlay"></div>
+    <div class="container hero-container">
+      
+      <!-- Topo da Hero: Logo, Nome e Status -->
+      <div class="hero-top-bar">
+        <img id="hero-logo" src="/images/logo.svg" alt="Logotipo do estabelecimento" class="hero-logo" width="80" height="80">
+        <div class="hero-brand-info">
+          <span id="hero-brand-name" class="hero-brand-name">Nome do Estabelecimento</span>
+          <div id="business-status-container"></div>
+        </div>
+      </div>
+
+      <!-- Conteúdo Comercial Principal -->
+      <div class="hero-main-content">
+        <h1 id="hero-headline" class="hero-headline">Título Comercial Principal</h1>
+        <p id="hero-subheadline" class="hero-subheadline">Descrição curta ou frase de apoio comercial</p>
+
+        <!-- Chips de Confiança (Artesanal, Delivery, Retirada) -->
+        <div class="hero-trust-chips" id="hero-trust-chips"></div>
+
+        <!-- Grupo de CTAs Principais -->
+        <div class="hero-cta-group">
+          <a id="hero-primary-cta" class="btn btn-hero-primary" href="#" target="_blank" rel="noopener noreferrer">
+            <span class="btn-icon" aria-hidden="true">💬</span>
+            <span id="hero-primary-cta-label">Pedir pelo WhatsApp</span>
+          </a>
+          <button type="button" id="hero-secondary-cta" class="btn btn-hero-secondary">
+            <span class="btn-icon" aria-hidden="true">📋</span>
+            <span id="hero-secondary-cta-label">Ver cardápio</span>
+          </button>
+        </div>
+
+        <!-- Chips Sociais Rápidos -->
+        <div class="hero-quick-chips" id="hero-quick-chips"></div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Barra Sticky de Navegação por Categorias -->
+  <nav class="categories-sticky-nav" id="categories-nav-wrapper">
+    <div id="categories-nav-container"></div>
+  </nav>
+
+  <!-- Conteúdo Principal -->
+  <main class="container" id="main-content">
+    
+    <!-- Seção de Destaques (Scroll Touch em CSS Nativo) -->
+    <section class="highlights-section" id="highlights-section" aria-labelledby="highlights-heading">
+      <div class="section-header">
+        <h2 id="highlights-heading" class="section-title">
+          <span aria-hidden="true">🔥</span> Destaques da Casa
+        </h2>
+      </div>
+      <div id="highlights-container"></div>
+    </section>
+
+    <!-- Container das Categorias e Produtos -->
+    <div id="menu-products-container"></div>
+
+    <!-- Seção de Informações Comerciais e Localização -->
+    <section class="info-section" id="info-section" aria-labelledby="info-heading">
+      <div class="section-header">
+        <h2 id="info-heading" class="section-title">
+          <span aria-hidden="true">📍</span> Informações & Localização
+        </h2>
+      </div>
+      <div class="info-grid" id="info-grid-container"></div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p id="footer-copyright">&copy; <span id="footer-year"></span> Burguer & Cia. Todos os direitos reservados.</p>
+      <p class="footer-credits">
+        Desenvolvido com o template <a href="https://assolin.com.br" target="_blank" rel="noopener noreferrer" class="footer-link">Cardápio Digital Essencial</a> da Assolin Tecnologia.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Módulo Principal de Aplicação -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

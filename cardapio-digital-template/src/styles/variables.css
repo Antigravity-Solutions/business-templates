@@ -1,0 +1,69 @@
+/* ==========================================================================
+   CSS Custom Properties - Design Tokens & Identidade Visual
+   ========================================================================== */
+
+:root {
+  /* Cores Principais do Tema (Podem ser sobrescritas dinamicamente via JS) */
+  --color-primary: #E63946;
+  --color-primary-hover: #C5221F;
+  --color-secondary: #1D3557;
+  --color-accent: #FFB703;
+  --color-accent-text: #000000;
+  
+  /* Superfícies e Fundos */
+  --color-bg: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F1F3F5;
+  --color-border: #E9ECEF;
+
+  /* Tipografia */
+  --color-text-primary: #212529;
+  --color-text-secondary: #6C757D;
+  --color-text-light: #FFFFFF;
+
+  /* Status e Alertas */
+  --color-success: #2B9348;
+  --color-success-bg: #E8F5E9;
+  --color-danger: #D90429;
+  --color-danger-bg: #FFEBEE;
+
+  /* Fontes */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.5rem;   /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Espaçamentos (Mobile-First) */
+  --space-2xs: 0.25rem; /* 4px */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 0.75rem;  /* 12px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+
+  /* Arredondamento */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Dimensões e Toque */
+  --min-touch-target: 44px;
+  --max-content-width: 1200px;
+  --header-height: 64px;
+}
