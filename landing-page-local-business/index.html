@@ -5,26 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO e Metatags Dinâmicas (Preenchidas pelo script.js) -->
-    <title>Carregando...</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="robots" content="index, follow">
+    <!-- Personalize os metadados no HTML antes de liberar indexação em produção. -->
+    <title>Empresa Local | Prévia</title>
+    <meta name="description" content="Conheça os serviços da empresa local.">
+    <meta name="robots" content="noindex, nofollow">
 
     <!-- Open Graph (Preenchido pelo script.js) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="assets/img/share-preview.jpg">
+    <meta property="og:title" content="Empresa Local | Prévia">
+    <meta property="og:description" content="Conheça os serviços da empresa local.">
 
     <!-- Twitter Cards (Preenchido pelo script.js) -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
-    <meta name="twitter:image" content="assets/img/share-preview.jpg">
-
-    <!-- Link Canonical (Preenchido pelo script.js) -->
-    <link rel="canonical" href="">
+    <meta name="twitter:title" content="Empresa Local | Prévia">
+    <meta name="twitter:description" content="Conheça os serviços da empresa local.">
 
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="styles.css">
@@ -217,7 +211,7 @@
         </section>
 
         <!-- Galeria Recentes -->
-        <section id="galeria" class="gallery-section" data-aos="fade-up" data-aos-delay="300">
+        <section id="galeria" class="gallery-section" data-aos="fade-up" data-aos-delay="300" hidden>
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Resultados Reais</span>
@@ -232,7 +226,7 @@
         </section>
 
         <!-- Seção Antes e Depois -->
-        <section id="resultados" class="before-after-section" data-aos="fade-up" data-aos-delay="300">
+        <section id="resultados" class="before-after-section" data-aos="fade-up" data-aos-delay="300" hidden>
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Destaques</span>
@@ -293,9 +287,8 @@
             </div>
         </section>
 
-        <!-- Depoimentos (Avisos de mock no README e HTML) -->
-        <!-- NOTA IMPORTANTE: Substituir os depoimentos fictícios por avaliações reais do Google Maps / Redes Sociais antes de publicar o site! -->
-        <section id="avaliacoes" class="testimonials-section" data-aos="fade-up" data-aos-delay="300">
+        <!-- Ativar apenas com avaliações reais e autorização de uso. -->
+        <section id="avaliacoes" class="testimonials-section" data-aos="fade-up" data-aos-delay="300" hidden>
             <div class="container">
                 <div class="section-title-wrapper">
                     <span class="section-subtitle">Opinião de Quem Confia</span>

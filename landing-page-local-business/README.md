@@ -1,6 +1,6 @@
 # Landing Page Template - Negócios Locais
 
-Template HTML/CSS/JS de alto desempenho, responsivo e esteticamente premium para pequenos negócios locais. Baseado na estrutura e layout de alta conversão da Desentupidora J.E., este template é totalmente parametrizável por meio de um único arquivo de configuração (`config.js`).
+Template HTML/CSS/JS responsivo para negócios locais. Derivado da estrutura inicial da Desentupidora J.E.; as melhorias genéricas são incorporadas aqui sem dados, domínio ou integrações exclusivos daquele cliente.
 
 ---
 
@@ -25,7 +25,7 @@ landing-page-local-business/
 
 O template funciona de forma 100% estática e dinâmica:
 1. O navegador carrega o `config.js` que define a constante global `siteConfig`.
-2. Em seguida, o `script.js` lê as informações do `siteConfig` (ou aciona os valores de fallback caso estejam ausentes) e preenche automaticamente o HTML, injeta as metatags de SEO, atualiza a paleta de cores e renderiza os grids (serviços, diferenciais, depoimentos, galeria, FAQs e mapas).
+2. Em seguida, o `script.js` lê as informações do `siteConfig`, preenche o conteúdo, atualiza metadados em runtime e renderiza os blocos opcionais quando habilitados e preenchidos.
 3. **Não requer backend, build, React ou banco de dados.** Funciona abrindo apenas o `index.html` diretamente no navegador.
 
 ---
@@ -35,15 +35,36 @@ O template funciona de forma 100% estática e dinâmica:
 Para criar uma nova landing page para um cliente diferente usando esta base:
 
 1. **Copie a pasta**: Copie a pasta inteira `landing-page-local-business` para um novo diretório (ex: `projeto-cliente-x`).
-2. **Edite o `config.js`**: Abra o arquivo `config.js` na raiz e altere as propriedades do objeto `siteConfig`:
+2. **Edite o `config.js`**: Abra o arquivo na raiz e altere as propriedades do objeto `siteConfig`:
    - Nome do negócio (`business.name`)
    - Telefone e WhatsApp (`business.phonePrimary`, `business.whatsappRaw`, etc.)
    - Serviços prestados (`services`)
    - Cidade e região atendida (`business.city` e `business.region`)
    - Cores da marca (`theme.primary`, `theme.secondary`, etc.)
 3. **Insira as fotos do cliente**: Cole as imagens reais do cliente dentro de `assets/img/`.
-4. **Referencie no config.js**: No `config.js`, preencha as chaves de imagem do Hero (`hero.image`) e da Galeria (`gallery[].image`) com o caminho correspondente (ex: `"assets/img/foto-equipe.jpg"`).
+4. **Referencie no config.js**: Preencha `hero.image` com a imagem real. A galeria exige `gallery[].image` e `sections.gallery: true`.
 5. **Teste localmente**: Dê dois cliques em `index.html` para abrir a página no navegador e certifique-se de que tudo está perfeito.
+
+### Galeria e depoimentos
+
+Ambas as seções começam **desativadas** e com arrays vazios. A seção só aparece quando a respectiva opção é `true` **e** há ao menos um item completo. A galeria usa carrossel com rolagem por toque e botões em telas maiores.
+
+```javascript
+sections: { gallery: true, testimonials: false },
+gallery: [{ label: "Sofá higienizado", image: "assets/img/sofa.webp" }],
+testimonials: []
+```
+
+Insira apenas fotos e depoimentos reais com autorização de uso. A comparação antes/depois (`beforeAfter`) também começa vazia e permanece oculta até conter um par de imagens do mesmo atendimento com contexto confirmado.
+
+### Preview e SEO de produção
+
+- O HTML começa com `noindex, nofollow` e sem URL canônica. `deployment.environment` começa em `preview`, com `allowIndexing: false`.
+- Para produção, configure `deployment.productionUrl` e `allowIndexing: true` **depois** de aprovar conteúdo e domínio. Atualize também no `index.html` o título, a descrição, Open Graph e `meta robots` para que estejam corretos no HTML inicial lido por buscadores e mensageiros; o JavaScript sozinho não substitui isso.
+- Informe `seo.shareImage` apenas quando a imagem social realmente existir; o código monta a URL absoluta em produção.
+- Configure `robots.txt`, `sitemap.xml`, redirecionamentos e cabeçalhos de acordo com o domínio e a hospedagem de cada cliente. Esses arquivos da J.E. não devem ser copiados com URLs da J.E.
+- O `LocalBusiness` em JSON-LD só é incluído em produção com indexação habilitada. Revise cidade, telefone e área atendida antes de publicar.
+- `analytics.trackContactClicks` começa em `false`. Quando ativado, registra `contact_click` no `dataLayer` para links de WhatsApp, telefone, Instagram e mapa. Configurar GTM/GA4 é uma etapa própria de cada cliente; o template não inclui ID da J.E.
 
 ---
 
@@ -71,9 +92,9 @@ Para substituir o placeholder cinza do mapa pelo mapa de localização real da e
 1. Vá ao Google Maps e procure pelo endereço ou nome da empresa.
 2. Clique em **Compartilhar** e selecione a aba **Incorporar um mapa**.
 3. Copie o código HTML gerado (que começa com `<iframe...`).
-4. Cole o código iframe completo ou apenas a URL do atributo `src` na chave `business.googleMapsEmbed` do `config.js`:
+4. Cole a URL do atributo `src` na chave `location.mapsEmbedUrl` do `config.js`:
    ```javascript
-   googleMapsEmbed: '<iframe src="https://www.google.com/maps/embed?..." width="600" height="450" ...></iframe>'
+   location: { mapsEmbedUrl: 'https://www.google.com/maps/embed?...' }
    ```
 5. Salve o arquivo. O `script.js` renderizará automaticamente o mapa real no lugar do placeholder.
 
@@ -111,7 +132,7 @@ A Vercel é excelente para hospedar landing pages estáticas por ser rápida, se
 ## 📋 Checklist Antes da Publicação
 
 > [!WARNING]
-> Os depoimentos fornecidos por padrão são **fictícios (mock dados)** para demonstração de layout. É obrigatório coletar avaliações reais do cliente antes de colocar o site em produção.
+> Galeria, depoimentos e comparativos começam vazios. Só ative os blocos com evidências reais e autorização de uso.
 
 Realize este checklist completo antes de entregar o site para o cliente final:
 
@@ -121,7 +142,7 @@ Realize este checklist completo antes de entregar o site para o cliente final:
 - [ ] **Cidade e Região**: Revisar os textos automáticos da área de cobertura.
 - [ ] **Serviços**: Garantir que todos os serviços listados condizem com o escopo de atuação do cliente.
 - [ ] **Imagens Reais**: Substituir todas as imagens de placeholder cinza por fotos reais enviadas pelo cliente.
-- [ ] **Avaliações**: Substituir as avaliações fictícias por depoimentos reais enviados por clientes da empresa (ex: Google Maps, WhatsApp ou prints).
+- [ ] **Avaliações**: Ativar depoimentos apenas após receber textos reais e autorização para exibi-los.
 - [ ] **Google Maps**: Inserir o iframe de localização real da empresa ou raio de atendimento.
 - [ ] **SEO**: Revisar o título da página e a descrição de metatag para indexação no Google.
 - [ ] **Responsividade**: Testar a abertura do site em computadores, tablets e smartphones de tamanhos variados.
