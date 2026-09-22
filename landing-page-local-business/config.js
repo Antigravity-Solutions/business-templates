@@ -6,6 +6,22 @@
  */
 
 const siteConfig = {
+  // Preview não deve ser indexado. Configure produção somente após definir domínio e conteúdo final.
+  deployment: {
+    environment: "preview",
+    productionUrl: "",
+    allowIndexing: false
+  },
+
+  // Eventos locais de intenção de contato; habilite apenas se houver plano de mensuração.
+  analytics: { trackContactClicks: false },
+
+  // Ative apenas depois de incluir imagens/depoimentos reais e autorizados.
+  sections: {
+    gallery: false,
+    testimonials: false
+  },
+
   // Configuração da navegação principal do header
   navigation: [
     { label: "Início", target: "inicio" },
@@ -45,7 +61,7 @@ const siteConfig = {
   // Tema de Cores do Site (Opcional)
   // Caso queira mudar a paleta do site de acordo com a marca do cliente
   theme: {
-    primary: "#0a2240",       // Cor principal (ex: Azul escuro)
+    primary: "#1a10a0",       // Cor principal (ex: Azul escuro)
     secondary: "#d90429",     // Cor secundária/botões (ex: Vermelho emergência)
     accent: "#ffb703",        // Cor de destaque/estrelas (ex: Amarelo)
     whatsapp: "#25d366"       // Cor do WhatsApp
@@ -55,7 +71,8 @@ const siteConfig = {
   seo: {
     title: "Serviços em Geral | Atendimento Profissional",
     description: "Serviços em Geral com atendimento rápido e profissional em Minha cidade e Região.",
-    keywords: "serviços locais, atendimento profissional, Serviços em Geral, Minha cidade e Região"
+    keywords: "serviços locais, atendimento profissional, Serviços em Geral, Minha cidade e Região",
+    shareImage: ""
   },
 
   // Conteúdo da Seção Hero (Topo da Página)
@@ -65,7 +82,7 @@ const siteConfig = {
     subtitle: "Soluções rápidas para residências, empresas e condomínios.",
     description: "Eletricista, Encanador, Infiltrações, Limpeza de pátios e prédios, Limpeza de Caixa d'água e de calhas, Pintura e mão de obras em geral.",
     image: "", // Caminho para imagem real (ex: "assets/img/hero.jpg"). Se vazio, exibe o placeholder.
-    imageAlt: "Serviços profissionais da Desentupidora J.E."
+    imageAlt: "Serviços profissionais da empresa"
   },
 
   // Lista de Serviços Oferecidos
@@ -116,44 +133,11 @@ const siteConfig = {
     }
   ],
 
-  // Galeria de Fotos Recentes
-  gallery: [
-    {
-      label: "Antes do serviço",
-      image: "" // Caminho para imagem (ex: "assets/img/galeria-1.jpg"). Se vazio, exibe o placeholder.
-    },
-    {
-      label: "Durante o atendimento",
-      image: "" // Caminho para imagem (ex: "assets/img/galeria-2.jpg"). Se vazio, exibe o placeholder.
-    },
-    {
-      label: "Serviço finalizado",
-      image: "" // Caminho para imagem (ex: "assets/img/galeria-3.jpg"). Se vazio, exibe o placeholder.
-    }
-  ],
+  // Galeria opcional: { label: "Descrição da foto", image: "assets/img/foto.webp" }
+  gallery: [],
 
-  // Avaliações dos Clientes (Depoimentos)
-  // NOTA IMPORTANTE: Substituir por avaliações reais antes da publicação final.
-  testimonials: [
-    {
-      name: "Carlos Silva",
-      city: "Santa Maria - RS",
-      text: "Atendimento rápido e serviço muito bem executado. Resolveram o problema de forma muito profissional e limpa.",
-      rating: 5
-    },
-    {
-      name: "Mariana Souza",
-      city: "Santa Maria - RS",
-      text: "Equipe extremamente educada, pontual e profissional. Preço justo e ótimo atendimento no pós-serviço.",
-      rating: 5
-    },
-    {
-      name: "Pedro Rodrigues",
-      city: "Santa Maria - RS",
-      text: "Resolveu o problema com muita agilidade. Equipe técnica muito bem preparada.",
-      rating: 5
-    }
-  ],
+  // Depoimentos opcionais: { name: "Nome autorizado", city: "Cidade", text: "Texto real", rating: 5 }
+  testimonials: [],
 
   // Perguntas Frequentes (FAQ)
   faq: [
@@ -182,22 +166,8 @@ const siteConfig = {
     "Atendimento residencial e empresarial"
   ],
 
-  beforeAfter: [
-    {
-      title: "Pintura Predial",
-      beforeImage: "",
-      afterImage: "",
-      beforeAlt: "Situação antes da pintura",
-      afterAlt: "Resultado após a pintura"
-    },
-    {
-      title: "Encanamento de Pias",
-      beforeImage: "",
-      afterImage: "",
-      beforeAlt: "Pia entupida antes do serviço",
-      afterAlt: "Pia após o encanamento"
-    }
-  ],
+  // Comparativos exigem duas fotos do mesmo atendimento e contexto confirmado.
+  beforeAfter: [],
 
   about: {
     eyebrow: "Quem Somos",

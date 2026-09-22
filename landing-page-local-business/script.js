@@ -46,15 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Orçamento sem compromisso",
             "Atendimento residencial e empresarial"
         ],
-        beforeAfter: [
-            {
-                title: "Exemplo de Limpeza",
-                beforeImage: "",
-                afterImage: "",
-                beforeAlt: "Antes",
-                afterAlt: "Depois"
-            }
-        ],
+        beforeAfter: [],
         services: [
             { title: "Serviço 1", description: "Descrição do serviço oferecido pelo negócio local.", featured: true },
             { title: "Serviço 2", description: "Descrição do serviço oferecido pelo negócio local.", featured: false }
@@ -63,11 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Atendimento rápido", description: "Resposta ágil para solicitações urgentes." },
             { title: "Equipe experiente", description: "Profissionais preparados para executar o serviço." }
         ],
-        gallery: [
-            { label: "Antes do serviço", image: "" },
-            { label: "Durante o atendimento", image: "" },
-            { label: "Serviço finalizado", image: "" }
-        ],
+        gallery: [],
         about: {
             eyebrow: "Quem Somos",
             title: "Atendimento profissional local",
@@ -86,9 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 imageAlt: "Equipamento profissional"
             }
         ],
-        testimonials: [
-            { name: "Cliente A", city: "Sua Cidade", text: "Atendimento rápido e serviço bem executado.", rating: 5 }
-        ],
+        testimonials: [],
         faq: [
             { question: "Como solicito atendimento?", answer: "Você pode entrar em contato pelo WhatsApp ou telefone." }
         ],
@@ -170,17 +156,37 @@ document.addEventListener('DOMContentLoaded', () => {
     setMetaTag('twitter:title', null, getConfigValue('seo.title'));
     setMetaTag('twitter:description', null, getConfigValue('seo.description'));
 
+    const productionUrl = getConfigValue('deployment.productionUrl');
+    const isProduction = getConfigValue('deployment.environment') === 'production'
+        && /^https:\/\//.test(productionUrl || '');
+    const allowIndexing = isProduction && getConfigValue('deployment.allowIndexing') === true;
+    setMetaTag('robots', null, allowIndexing ? 'index, follow' : 'noindex, nofollow');
+
+    const canonicalUrl = isProduction ? new URL('/', productionUrl).href : '';
     let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-        canonicalLink = document.createElement('link');
-        canonicalLink.rel = 'canonical';
-        document.head.appendChild(canonicalLink);
+    if (canonicalUrl) {
+        if (!canonicalLink) {
+            canonicalLink = document.createElement('link');
+            canonicalLink.rel = 'canonical';
+            document.head.appendChild(canonicalLink);
+        }
+        canonicalLink.href = canonicalUrl;
+        setMetaTag(null, 'og:url', canonicalUrl);
+    } else {
+        canonicalLink?.remove();
+        document.querySelector('meta[property="og:url"]')?.remove();
     }
-    canonicalLink.href = window.location.href.split('?')[0].split('#')[0];
+
+    const shareImage = getConfigValue('seo.shareImage');
+    if (isProduction && shareImage) {
+        const imageUrl = new URL(shareImage, canonicalUrl).href;
+        setMetaTag(null, 'og:image', imageUrl);
+        setMetaTag('twitter:image', null, imageUrl);
+    }
 
     // Set JSON-LD Schema.org LocalBusiness
     let schemaScript = document.querySelector('script[type="application/ld+json"]');
-    if (!schemaScript) {
+    if (!schemaScript && allowIndexing) {
         schemaScript = document.createElement('script');
         schemaScript.type = 'application/ld+json';
 
@@ -190,22 +196,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const region = getConfigValue('business.region');
         const heroImg = getConfigValue('hero.image');
 
-        const origin = window.location.origin && window.location.origin !== 'null' ? window.location.origin : '';
         const schemaData = {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": businessName,
-            "image": heroImg ? (origin + "/" + heroImg) : (origin + "/assets/img/share-preview.jpg"),
             "telephone": phonePrimary,
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": city,
-                "addressRegion": "RS",
                 "addressCountry": "BR"
             },
             "areaServed": region,
-            "url": window.location.href.split('?')[0].split('#')[0]
+            "url": canonicalUrl
         };
+        if (heroImg) schemaData.image = new URL(heroImg, canonicalUrl).href;
 
         schemaScript.text = JSON.stringify(schemaData);
         document.head.appendChild(schemaScript);
@@ -228,6 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navigation.forEach(item => {
             if (!item || !item.label || !item.target) return;
+            if (item.target === 'galeria' && document.getElementById('galeria')?.hidden) return;
+            if (item.target === 'resultados' && document.getElementById('resultados')?.hidden) return;
 
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -318,10 +324,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const beforeAfterGrid = document.getElementById('before-after-grid');
         if (!beforeAfterGrid) return;
 
-        let beforeAfter = getConfigValue('beforeAfter');
-        if (!Array.isArray(beforeAfter) || beforeAfter.length === 0) {
-            beforeAfter = defaultFallbackConfig.beforeAfter;
-        }
+        const beforeAfter = (getConfigValue('beforeAfter') || [])
+            .filter(item => item?.beforeImage && item?.afterImage);
 
         beforeAfterGrid.innerHTML = '';
         beforeAfter.forEach(item => {
@@ -655,33 +659,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 11. Gallery Renderer
     function renderGallery() {
-        const galleryItems = getConfigValue('gallery') || [];
+        const galleryItems = (getConfigValue('gallery') || []).filter(item => item?.image && item?.label);
         const galleryGrid = document.getElementById('gallery-grid');
         if (!galleryGrid) return;
         galleryGrid.innerHTML = '';
 
+        const carousel = document.createElement('div');
+        carousel.className = 'gallery-carousel';
+        const track = document.createElement('div');
+        track.className = 'gallery-track';
+        track.setAttribute('aria-label', 'Fotos de serviços realizados');
+
         galleryItems.forEach(item => {
             const card = document.createElement('div');
             card.className = 'gallery-card';
-            if (item.image) {
-                card.innerHTML = `<img src="${item.image}" alt="${item.label}" class="gallery-image" loading="lazy">`;
-            } else {
-                card.innerHTML = `
-                    <div class="image-placeholder gallery-placeholder">
-                        <div class="placeholder-content">
-                            <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 16V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z"/>
-                                <circle cx="8.5" cy="10.5" r="1.5"/>
-                                <polyline points="21 16 16 11 12 15 9 12 3 18"/>
-                            </svg>
-                            <span>${item.label}</span>
-                            <small>[Placeholder de Imagem 16:10]</small>
-                        </div>
-                    </div>
-                `;
-            }
-            galleryGrid.appendChild(card);
+            const image = document.createElement('img');
+            image.src = item.image;
+            image.alt = item.label;
+            image.className = 'gallery-image';
+            image.loading = 'lazy';
+            card.appendChild(image);
+            track.appendChild(card);
         });
+
+        carousel.appendChild(track);
+        if (galleryItems.length > 1) {
+            for (const [direction, label, className, symbol] of [
+                [-1, 'Ver imagens anteriores', 'gallery-nav-prev', '‹'],
+                [1, 'Ver próximas imagens', 'gallery-nav-next', '›']
+            ]) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = `gallery-nav ${className}`;
+                button.setAttribute('aria-label', label);
+                button.textContent = symbol;
+                button.addEventListener('click', () => {
+                    const firstCard = track.querySelector('.gallery-card');
+                    const distance = firstCard ? firstCard.getBoundingClientRect().width + 24 : 320;
+                    track.scrollBy({ left: direction * distance, behavior: 'smooth' });
+                });
+                carousel.appendChild(button);
+            }
+        }
+        galleryGrid.appendChild(carousel);
     }
     // 12. Location and Google Maps Renderer
     function renderLocation() {
@@ -762,7 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!testimonialsGrid) return;
         testimonialsGrid.innerHTML = '';
 
-        testimonials.forEach(testimonial => {
+        testimonials.filter(item => item?.name && item?.text).forEach(testimonial => {
             const card = document.createElement('div');
             card.className = 'testimonial-card';
             const starsFilled = '★'.repeat(testimonial.rating || 5);
@@ -776,6 +796,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             testimonialsGrid.appendChild(card);
+        });
+    }
+
+    // Intenção de contato; a integração com GTM/GA4 é definida por cliente.
+    function initContactTracking() {
+        if (getConfigValue('analytics.trackContactClicks') !== true) return;
+        document.addEventListener('click', event => {
+            const target = event.target instanceof Element ? event.target : event.target?.parentElement;
+            const link = target?.closest('a[data-whatsapp-link], a[data-phone-primary-link], a[data-instagram-link], a.map-external-link');
+            if (!link) return;
+            const contactType = link.hasAttribute('data-whatsapp-link') ? 'whatsapp'
+                : link.hasAttribute('data-phone-primary-link') ? 'phone'
+                : link.hasAttribute('data-instagram-link') ? 'instagram' : 'maps';
+            const location = link.closest('section')?.id || (link.closest('header') ? 'header' : 'footer');
+            try {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: 'contact_click', contact_type: contactType,
+                    contact_location: location, contact_label: link.textContent.trim() });
+            } catch {
+                // Falhas de mensuração não devem impedir a navegação do contato.
+            }
         });
     }
 
@@ -1005,7 +1046,15 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
 
     // 1. Dynamic Rendering (Must run first)
+    const gallery = (getConfigValue('gallery') || []).filter(item => item?.image && item?.label);
+    const testimonials = (getConfigValue('testimonials') || []).filter(item => item?.name && item?.text);
+    const beforeAfter = (getConfigValue('beforeAfter') || []).filter(item => item?.beforeImage && item?.afterImage);
+    document.getElementById('galeria').hidden = getConfigValue('sections.gallery') !== true || gallery.length === 0;
+    document.getElementById('avaliacoes').hidden = getConfigValue('sections.testimonials') !== true || testimonials.length === 0;
+    document.getElementById('resultados').hidden = beforeAfter.length === 0;
+
     renderNavigation();
+    initContactTracking();
     renderHeroImage();
     renderTrustBar();
     renderBeforeAfter();
@@ -1073,10 +1122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
         INTERSECTION OBSERVER FOR ANIMATIONS
        ========================================================================== */
-    AOS.init({
-        duration: 600,
-        once: false
-    });
+    if (typeof AOS !== 'undefined') AOS.init({ duration: 600, once: false });
     
     const observer = new IntersectionObserver(
       entries => {
